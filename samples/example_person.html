@@ -1,0 +1,115 @@
+<!--
+  This example contains historical-data markup for Charles Darwin, born Feb 12, 1809 at
+  St. Clouds in Shrewsbury, Shropshire, UK, and died about Apr 19, 1882, in Downe, Kent, UK.
+  It demonstrates the use of http://schema.org/Person.
+
+  It can be loaded into http://foolip.org/microdatajs/live/ to see how it would display and
+  how the JSON is parsed into a microdata Item.
+-->
+
+<!--
+  The div tag contains the Person item for Charles Darwin.
+  Most properties are in meta tags since they are not intended to be displayed.
+  Note that in this example, the decision was made to reference many of the properties
+  using 'itemref' since they are located outside of the div tag. Note that the 'itemref'
+  attribute may only be used on tags that also have an 'itemscope' attribute!
+  This design was necessary because the information is scattered throughout the page
+  and one div tag cannot contain all the elements.
+
+  An alternative design would be to rework the HTML so that the entire Item can be contained
+  in one div tag. However, it is usually preferable to adapt the microdata to the HTML rather
+  than the forcing the HTML to fit the Item structure. This example shows one way of doing that.
+
+  Note that if you do use 'itemref' be careful to keep the referenced tags outside the scope
+  of the Item. Otherwise, they will appear as duplicates in the JSON.
+-->
+<div itemscope itemtype="http://schema.org/Person">
+  <!-- Use a 'meta' tag for properties that will not be displayed. -->
+  <meta itemprop="url" content="http://www.geni.com/people/Charles-Darwin/6000000001779353747"/>
+  <!-- Recommended values for gender are 'male', 'female' or 'unknown'. -->
+  <meta itemprop="gender" content="male"/>
+  <!-- Use 'itemref' to indicate where additional properties are found. -->
+  <!-- Technically, the 'content' attribute is required, so provide an empty one. -->
+  <meta itemprop="birth" itemscope itemtype="http://schema.org/Event"
+      itemref="birth_date birth_location" content=""/>
+  <!-- For compatibility with Person, specify both birth and birthDate, death and deathDate. -->
+  <meta itemprop="birthDate" content="1809-02-12"/>
+  <meta itemprop="death" itemscope itemtype="http://schema.org/Event" itemref="death" content=""/>
+  <meta itemprop="deathDate" content="1882-04-19"/>
+  <!-- For this contrived example, the source simply has the contributor and modified date. -->
+  <meta itemprop="source" itemscope itemtype="http://schema.org/HistoricalRecord"
+      itemref="contributor modified" content=""/>
+  <img src="images/charles_darwin.gif" alt="Photo of Charles Darwin"/>
+  <h2>
+    <!-- Prefer 'givenName' and 'familyName' over 'name', but either form can be used. -->
+    <!-- Specifying both is possible, but the results depend on the application using it. -->
+    <span itemprop="givenName">Charles Robert</span>
+    <span itemprop="familyName">Darwin</span> (1809 - 1882)
+  </h2>
+</div>
+
+<!--
+  Since these tags all exist outside the itemscope'd div tag, they will not be parsed as part
+  of the Person item unless they are referenced in an 'itemref' attribute inside the div.
+-->
+<table>
+  <tr>
+    <td>Birthdate:</td>
+    <td>
+      <!--
+        A note on time tags. The microdata spec calls for specifying time as shown in this tag.
+        However, neither the foolip.org microdata checker nor the jquery.microdata parser correctly
+        support the time tag. A simple modification to jquery.microdata.js fixes the parser.
+      -->
+      <time id="birth_date" itemprop="startDate" datetime="1809-02-12">February 12, 1809</time>
+    </td>
+  </tr>
+  <tr>
+    <td>Birthplace:</td>
+    <td id="birth_location" itemprop="location" itemscope itemtype="http://schema.org/Place">
+      <!-- Place.name is the name of the building or location, not its address. -->
+      <span itemprop="name">St. Clouds</span>,
+      <!-- The address goes into the PostalAddress item. -->
+      <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="addressLocality">Shrewsbury</span>,
+        <span itemprop="addressRegion">Shropshire</span>,
+        <!-- Use a 'data' tag for properties that have different display and machine values. -->
+        <data itemprop="addressCountry" value="UK">United Kingdom</data>
+      </span>
+      <!-- To create an item with nested properties, the 'span' tag is convenient. -->
+      <!-- Note that 'meta' cannot be used for this since it has no members in the DOM. -->
+      <span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+        <meta itemprop="latitude" content="54.313919"/>
+        <meta itemprop="longitude" content="-2.23218"/>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>Death:</td>
+    <td id="death">
+      Died
+      <!-- Use Library of Congress Extended Date Time Format for approximate dates. -->
+      <!-- Note that this is not (yet) officially supported by microdata, so use with care. -->
+      <time itemprop="startDate" datetime="1882-04-19~">abt. April 19, 1882</time>
+      in
+      <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+        <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="addressLocality">Downe</span>,
+          <span itemprop="addressRegion">Kent</span>,
+          <data itemprop="addressCountry" value="UK">United Kingdom</data>
+        </span>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>Managed by:</td>
+    <td id="contributor" itemprop="contributor" itemscope itemtype="http://schema.org/Person">
+      <span itemprop="name">Terry Jackson (Switzer)</span>
+    </td>
+  </tr>
+</table>
+<div>
+  (Last updated
+  <time id="modified" itemprop="dateModified" datetime="2011-06-26T20:03:33-07:00">
+    June 26, 2011</time>)
+</div>

@@ -1,0 +1,54 @@
+body {
+  background: #fff;
+  color: #333;
+  font: .8em arial, helvetica, sans-serif;
+  width: 600px;
+}
+
+table {
+  border: 1px solid #99b27f;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+thead tr {
+  background: #99b27f;
+  color: #fff;
+}
+
+tbody {
+  overflow: auto;
+}
+
+tr:nth-child(even) {
+  background: #eaefe5;
+}
+
+th,
+td {
+  padding: 3px 5px;
+  text-align: left;
+  vertical-align: top;
+  width: 180px;
+}
+
+th:nth-child(4),
+td:nth-child(4),
+td:nth-child(n+4) {
+  width: 16px;
+}
+
+#shareBox {
+  border: 1px solid #99b27f;
+  overflow: auto;
+  padding: 0 5px;
+}
+
+#debug {
+  border: 1px solid #99b27f;
+  display: none;
+  height: 200px;
+  overflow: auto;
+  padding: 0 5px;
+}

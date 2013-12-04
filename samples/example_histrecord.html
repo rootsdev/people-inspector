@@ -1,0 +1,101 @@
+<!--
+  This example contains historical-data markup for a fictitious historical record about
+  Charles Darwin's birth.
+
+  It is not anticipated that historical records will contain full data about the Person(s)
+  referenced in the document, though it is possible to do it that way. This example simply
+  references the people through a URL to the person.
+
+  Note that only the referenced person's properties that are provided on this page will
+  be accessible to clients. If the person is referenced only by URL, that URL will need to
+  be loaded by the client to gain access to the properties.
+
+  This can be loaded into http://foolip.org/microdatajs/live/ to see how it would display and
+  how the JSON is parsed into a microdata Item.
+-->
+
+<!--
+  The div tag contains the HistoricalRecord item for the record.
+  Some properties are in meta tags since they are not intended to be displayed.
+  Note that in this example, most properties are inline, contained within the HistoricalRecord
+  div tag since most elements are displayed within that tag.
+-->
+<div itemscope itemtype="http://schema.org/HistoricalRecord">
+  <!-- Use a 'meta' tag for properties that will not be displayed. -->
+  <meta itemprop="url" content="http://www.geni.com/records/Charles-Darwin/6000000001779353747"/>
+  <!-- There is currently no standard set of record types. -->
+  <meta itemprop="type" content="Birth Certificate"/>
+  <!--
+  A note on time tags. The microdata spec calls for specifying time as shown in this tag.
+  However, neither the foolip.org microdata checker nor the jquery.microdata parser correctly
+  support the time tag. A simple modification to jquery.microdata.js fixes the parser.
+  -->
+  <meta itemprop="date" content="1809-02-12"/>
+  <img src="images/charles_darwin.gif" alt="Photo of Charles Darwin"/>
+  <h2>
+    <span itemprop="name">Birth Certificate for Charles Darwin</span>
+  </h2>
+
+  <table>
+    <tr>
+      <td>Birth of:</td>
+      <td itemprop="person" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="url" content="http://www.geni.com/people/1779353747"/>
+        <div>
+          <span itemprop="givenName">Charles</span>
+          <span itemprop="givenName">Robert</span>
+          <span itemprop="familyName">Darwin</span>
+        </div>
+      </td>
+    </tr>
+    <tr itemprop="event" itemscope itemtype="http://schema.org/Event">
+      <td>Birth data:</td>
+      <td>
+        Born
+        <time id="birth_date" itemprop="startDate" datetime="1809-02-12">February 12, 1809</time>
+        at
+        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+          <!-- Place.name is the name of the building or location, not its address. -->
+          <span itemprop="name">St. Clouds</span>,
+          <!-- The address goes into the PostalAddress item. -->
+          <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="addressLocality">Shrewsbury</span>,
+            <span itemprop="addressRegion">Shropshire</span>,
+            <!-- Use a 'data' tag for values that have different display and machine values. -->
+            <data itemprop="addressCountry" value="UK">United Kingdom</data>
+          </span>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>Parents:</td>
+      <td itemprop="family" itemscope itemtype="http://schema.org/Family">
+        <div itemprop="parent" itemscope itemtype="http://schema.org/Person">
+          <meta itemprop="url" content="http://www.geni.com/people/134152433"/>
+          <data itemprop="gender" value="male">Father:</data>
+          <span itemprop="givenName">Robert</span>
+          <span itemprop="givenName">Waring</span>
+          <span itemprop="familyName">Darwin</span>
+        </div>
+        <div itemprop="parent" itemscope itemtype="http://schema.org/Person">
+          <meta itemprop="url" content="http://www.geni.com/people/134159887"/>
+          <data itemprop="gender" value="female">Mother:</data>
+          <span itemprop="givenName">Susannah</span>
+          <span itemprop="familyName">Wedgwood</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Managed by:</td>
+      <td itemprop="contributor" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Terry Jackson (Switzer)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>Last updated:</td>
+      <td><time itemprop="dateModified" datetime="2011-06-26T20:03:33-07:00">
+        June 26, 2011</time>
+      </td>
+    </tr>
+  </table>
+</div>

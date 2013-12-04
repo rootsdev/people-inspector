@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>People Finder Extension Test</title>
+    <script src="../extension/js/jquery_1_6_4.js"></script>
+    <script src="test_mocks.js"></script>
+    <script src="../extension/js/edtfdate.js"></script>
+    <script src="../extension/js/person.js"></script>
+    <script src="../extension/js/popup.js"></script>
+    <script src="edtfdate_test.js"></script>
+    <script src="popup_test.js"></script>
+    <script src="person_test.js"></script>
+  </head>
+  <body>
+    <div>Test Results</div>
+    <script>
+      var tests = [
+        testBuildFamilySearchUrl,
+        testBuildMyHeritageUrl,
+        testBuildMyHeritageUrl_NoDates,
+        testBuildGeniSearchUrl,
+        testBuildPeopleSearchUrl,
+        testBuildImageSearchUrl,
+        testBuildBookSearchUrl,
+        testBuildGooglePlusUrl,
+        testBuildNewsSearchUrl,
+        testBuildMapsUrl_both,
+        testBuildMapsUrl_birth,
+        testBuildMapsUrl_death,
+        testBuildGoogleQuery,
+        testBuildGoogleQuery_excludeData,
+        testExtractPerson_HistoricalPerson,
+        testExtractPerson_SchemaPerson,
+        testUpdateName_Name,
+        testUpdateName_Name_Single,
+        testUpdateName_Name_InternalSpaces,
+        testUpdateName_FamilyName,
+        testUpdateName_FamilyName_Single,
+        testUpdateName_FamilyName_InternalSpaces,
+        testExtractLocation_Place,
+        testExtractLocation_PostalAddress,
+        testEdtfDateFromString,
+        testEdtfDateFromString_Uncertain,
+        testEdtfDateFromString_Approx,
+        testEdtfDateFromString_UncertainApprox,
+        testEdtfDateToEdtfString,
+        testEdtfDateToLocaleDateString,
+        testEdtfDateToDate
+      ];
+      for (var i = 0, test; test = tests[i]; i++) {
+        outln('<b>' + test.name + '</b>');
+        test();
+        outln('<i>Passed</i>');
+      }
+    </script>
+    <div>Done</div>
+  </body>
+</html>

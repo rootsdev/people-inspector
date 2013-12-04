@@ -1,0 +1,93 @@
+<!--
+  This example contains historical-data markup for the Shirley Temple family (her parents
+  and siblings). It demonstrates the use of http://schema.org/Family, which could
+  be used on, for example, a family group sheet.
+
+  It can be loaded into http://foolip.org/microdatajs/live/ to see how it would display and
+  how the JSON is parsed into a microdata Item.
+-->
+
+<!--
+  The div tag contains the Family item for the Temple family.
+  Some properties are in meta tags since they are not intended to be displayed.
+  Note that in this example, most properties are inline, contained within the Family
+  div tag since most elements are displayed within that tag. The marriage is outside,
+  for illustration purposes.
+-->
+<div itemscope itemtype="http://schema.org/Family">
+  <!-- Use a 'meta' tag for properties that will not be displayed. -->
+  <meta itemprop="url" content="http://www.geni.com/families/George-Temple/115424"/>
+  <!-- Use 'itemref' to indicate where additional properties are found. -->
+  <!-- Technically, the 'content' attribute is required, so provide an empty one. -->
+  <meta itemprop="marriage" itemscope itemtype="http://schema.org/Event"
+      itemref="marriage" content=""/>
+  <h2 itemprop="name">George and Gertrude Temple <i>Family</i></h2>
+  <ul>
+    <li itemprop="parent" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="url" content="http://www.geni.com/people/1341525531"/>
+      <img alt="" src="images/photo.gif?1341525531"/>
+      <div>
+        <!-- This is a nice way to provide the name when there are multiple given names. -->
+        <span itemprop="givenName">George</span>
+        <span itemprop="givenName">Francis</span>
+        <span itemprop="familyName">Temple</span>
+      </div>
+      <!-- Use a 'data' tag for properties that have different display and machine values. -->
+      <div><data itemprop="gender" value="male">husband</data></div>
+    </li>
+    <li itemprop="parent" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="url" content="http://www.geni.com/people/1341525281"/>
+      <img alt="" src="images/photo.gif?1341525281"/>
+      <div>
+        <span itemprop="givenName">Gertrude</span>
+        <span itemprop="familyName">Krieger</span>
+      </div>
+      <div><data itemprop="gender" value="female">wife</data></div>
+    </li>
+    <li itemprop="child" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="url" content="http://www.geni.com/people/5344483863"/>
+      <img alt="" src="images/photo.gif?5344483863"/>
+      <div>
+        <span itemprop="givenName">Shirley</span>
+        <span itemprop="givenName">Jane</span>
+        <span itemprop="familyName">Temple</span>
+      </div>
+      <div><data itemprop="gender" value="female">daughter</data></div>
+    </li>
+    <li itemprop="child" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="url" content="http://www.geni.com/people/1341522688"/>
+      <img alt="" src="images/photo.gif?1341522688"/>
+      <div>
+        <span itemprop="givenName">John</span>
+        <span itemprop="familyName">Temple</span>
+      </div>
+      <div><data itemprop="gender" value="male">son</data></div>
+    </li>
+    <li itemprop="child" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="url" content="http://www.geni.com/people/1341525232"/>
+      <img alt="" src="images/photo.gif?1341525232"/>
+      <div>
+        <span itemprop="givenName">George</span>
+      </div>
+      <div><data itemprop="gender" value="male">son</data></div>
+    </li>
+  </ul>
+</div>
+
+<!--
+  Since these tags all exist outside the itemscope'd div tag, they will not be parsed as part
+  of the Family item unless they are referenced in an 'itemref' attribute inside the div.
+-->
+<div id="marriage">
+  <meta itemprop="url" content="http://www.geni.com/marriages/33858433"/>
+  <div itemprop="name">Marriage of George Temple and Gertrude Krieger</div>
+  <!--
+    A note on time tags. The microdata spec calls for specifying time as shown in this tag.
+    However, neither the foolip.org microdata checker nor the jquery.microdata parser correctly
+    support the time tag. A simple modification to jquery.microdata.js fixes the parser.
+  -->
+  <time itemprop="startDate" datetime="1910">1910</time>
+  <div itemprop="location" itemscope itemtype="http://schema.org/PostalAddress">
+    <span itemprop="addressLocality">Los Angeles</span>, <span itemprop="addressRegion">CA</span>
+  </div>
+</div>
